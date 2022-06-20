@@ -37,3 +37,22 @@ recursive calls to end. So it printed my DAG even if the others threads was stil
 because I was trying to read and write at the same time in my data structure.
 
 Here is why I should implement WaitGroups to prevent my program to continue before every recursive calls ended up.
+
+#### 2: Mutex
+
+
+A mutual exclusion object (mutex) is a program object that allows multiple program threads
+to share the same resource, such as file access, but not simultaneously.
+
+In this part of the program, there is a case of data race when I add the address of the new node to the slice of address of
+the parent node. In a multi-thread execution, this can be a problem to append on the same slice on different thread because 
+this action is not atomic, and one of the first things it does is copying the initial slice. But imagine that the both threads
+add their address to the slice, but they will both have a different copy of the slice. And finally the both will set value of the original slice
+to its own copy. So one of the address will be lost.
+
+Here on this part of DagViz, I will need tou use mutex to prevent 2 access to the same slice at the same time.
+
+### Solution
+![](.assets/logic2.png)
+
+
