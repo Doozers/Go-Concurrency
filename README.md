@@ -1,4 +1,4 @@
-# Go-Concurrency-
+# Go-Concurrency
 Here I store and share my learning about Go concurrency :smile:.
 
 ### Data race
